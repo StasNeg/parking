@@ -1,6 +1,6 @@
 package com.example.demo.configuration;
 
-import com.example.demo.service.MyUserDetailsService;
+import com.example.demo.service.ParkingUserDetailsService;
 import com.example.demo.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -18,17 +17,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    private MyUserDetailsService userDetailsService;
+    private ParkingUserDetailsService userDetailsService;
 
     private AuthSuccessHandler authSuccessHandler;
 
     @Autowired
-    public SpringSecurityConfig(MyUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
+    public SpringSecurityConfig(ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
         this.userDetailsService = userDetailsService;
         this.authSuccessHandler = authSuccessHandler;
     }
 
-    public SpringSecurityConfig(boolean disableDefaults, MyUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
+    public SpringSecurityConfig(boolean disableDefaults, ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
         super(disableDefaults);
         this.userDetailsService = userDetailsService;
         this.authSuccessHandler = authSuccessHandler;

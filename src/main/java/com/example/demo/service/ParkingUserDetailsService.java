@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.user.MyUserPrincipal;
+import com.example.demo.model.user.ParkingUserPrincipal;
 import com.example.demo.model.user.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +10,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class ParkingUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
 
     @Autowired
-    public MyUserDetailsService(UserRepository userRepository) {
+    public ParkingUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -25,6 +25,6 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }
-        return new MyUserPrincipal(user);
+        return new ParkingUserPrincipal(user);
     }
 }

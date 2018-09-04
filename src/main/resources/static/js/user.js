@@ -103,7 +103,7 @@ function signIn() {
                 'dataType': 'json',
                 'success': function(data, status){
                     if(data.success){
-                        redirect(basicUrl+"/user/all");
+                        redirect(basicUrl+"/user/car");
                     }else{
                         alert("Login or password incorrect");
                     }

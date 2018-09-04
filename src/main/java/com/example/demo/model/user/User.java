@@ -84,6 +84,16 @@ public class User extends AbstractBaseEntity {
         this.lastName = lastName;
     }
 
+    public User(@Email @NotBlank String email, @NotBlank String firstName, String lastName, @NotBlank @Size(min = 5) String password, boolean enabled, @NotNull Date registered, Set<Role> roles) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.enabled = enabled;
+        this.registered = registered;
+        this.roles = roles;
+    }
+
     public User(Long id, @Email @NotBlank String email, @NotBlank String firstName, String lastName, @NotBlank @Size(min = 5) String password, boolean enabled, @NotNull Date registered, Set<Role> roles, List<Car> cars) {
         super(id);
         this.email = email;

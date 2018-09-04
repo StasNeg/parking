@@ -5,10 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class MyUserPrincipal implements UserDetails {
+public class ParkingUserPrincipal implements UserDetails {
     private User user;
 
-    public MyUserPrincipal(User user) {
+    public ParkingUserPrincipal(User user) {
         this.user = user;
     }
 
@@ -45,5 +45,9 @@ public class MyUserPrincipal implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
     }
 }
