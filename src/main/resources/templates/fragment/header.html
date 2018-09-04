@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+>
+<head th:fragment="head">
+    <!--<meta http-equiv="Content-Type" content="application/html; charset=UTF-8"/>-->
+    <title th:text="${metaTitle} ? ${metaTitle} : 'default title'"></title>
+    <!--<link rel="stylesheet"-->
+    <!--href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+    />
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="../../../css/main.css"/>
+
+</head>
+<body th:fragment="body">
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+
+                <span class="icon-bar"></span> <span class="icon-bar"></span>
+
+            </button>
+            <a class="navbar-brand" href="#">Brand Name</a>
+
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="#" class="">Home</a>
+                </li>
+                <li class=""><a href="#" class="">Locations</a>
+                </li>
+                <li class=""><a href="#" class="">About</a>
+                </li>
+            </ul>
+
+            <div class="button-group" sec:authorize="!isFullyAuthenticated()">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-toggle="modal" data-target="#modalLogIn" class="">Sign In</a>
+                    </li>
+                    <li><a href="#" data-toggle="modal" data-target="#modalRegister" class="">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="button-group" sec:authorize="isFullyAuthenticated()">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/logout">Logout</a>
+                    <li>
+                </ul>
+            </div>
+
+        </div>
+        <!--/.navbar-collapse -->
+    </div>
+</nav>
+
+
+</body>
+</html>
