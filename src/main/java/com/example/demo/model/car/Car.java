@@ -3,6 +3,7 @@ package com.example.demo.model.car;
 
 import com.example.demo.model.AbstractBaseEntity;
 import com.example.demo.model.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -22,6 +23,7 @@ public class Car extends AbstractBaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     @NotNull
     private User user;
 

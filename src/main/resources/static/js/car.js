@@ -14,16 +14,17 @@ $(".btnDelete").click(function() {
 
 $(".btnAdd").click(function() {
         console.log("Add new");
-        $(".modal-title").text("Add new car");
+        console.log(carsValue);
 });
 
-$('#modalRegister').on('shown.bs.modal', function (e) {
-      $('#idNumber').val('');
-      $('#email').val('');
-      $('#lName').val('');
-      $('#fName').val('');
-      $('#password').val('');
-      $('#confirm_password').val('');
+$('#editOrCreate').on('shown.bs.modal', function (e) {
+      jQuery.each( produsers, function( i, val ) {
+        $("#carProducer").append('<option value="'+i+'">'+val+'</option>');
+        });
+      jQuery.each( types, function( i, val ) {
+              console.log(i+": " + val);
+              $("#carType").append('<option value="'+i+'">'+val+'</option>');
+              });
       resetValidation();
 })
 

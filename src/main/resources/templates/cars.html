@@ -6,6 +6,11 @@
 <div class="container">
     <div class="starter-template">
         <h1>Cars</h1>
+        <script type="text/javascript" th:inline="javascript">
+            var carsValue = [[${cars}]];
+            var produsers = [[${producers}]];
+            var types = [[${types}]]
+        </script>
         <div class="table-responsive">
             <table class="table table-bordred table-striped">
                 <tr name="headerTable">
@@ -78,16 +83,25 @@
                                    aria-describedby="carNumber">
                         </div>
                         <div class="form-group">
-                            <label for="carDescription">Password:</label>
+                            <label for="carProducer">Producer:</label>
+                            <select class="form-control" id="carProducer" name="carProducer"
+                                    placeholder="carProducer"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="carName">Model:</label>
+                            <input type="text" class="form-control" id="carName" name="carName"
+                                   placeholder="carName">
+                        </div>
+                        <div class="form-group">
+                            <label for="carType">Type:</label>
+                            <select class="form-control" id="carType" name="carType"
+                                    placeholder="carType"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="carDescription">Description:</label>
                             <input type="text" class="form-control" id="carDescription" name="carDescription"
                                    placeholder="carDescription">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Confirm Password:</label>
-                            <input type="text" class="form-control" id="description" name="description"
-                                   placeholder="description">
-                        </div>
-
                         <div class="form-group">
                             <button type="submit" class="btn btn-default">Save</button>
                         </div>

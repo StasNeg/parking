@@ -4,6 +4,7 @@ $(document).ready( function () {
         rules: {
             carNumber: "required",
             carType: "required",
+            carProducer: "required"
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {

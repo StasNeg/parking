@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.enums.CarProducer;
+import com.example.demo.model.enums.CarType;
 import com.example.demo.service.CarServise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class CarController {
     @RequestMapping(path = "/user/car")
     public String welcome(Map<String, Object> model) {
         model.put("cars",carServise.getCars());
+        model.put("producers",CarProducer.values());
+        model.put("types",CarType.values());
         return "cars";
     }
 }
