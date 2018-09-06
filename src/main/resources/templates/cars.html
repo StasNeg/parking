@@ -85,7 +85,13 @@
                         <div class="form-group">
                             <label for="carProducer">Producer:</label>
                             <select class="form-control" id="carProducer" name="carProducer"
-                                    placeholder="carProducer"></select>
+                                    placeholder="carProducer">
+                                <option value="0"
+                                        selected="selected"></option>
+                                <option th:each="producer,iter : ${producers}" th:value="${iter.index+1}"
+                                        th:text="${producer}"></option>
+
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="carName">Model:</label>
@@ -95,7 +101,13 @@
                         <div class="form-group">
                             <label for="carType">Type:</label>
                             <select class="form-control" id="carType" name="carType"
-                                    placeholder="carType"></select>
+                                    placeholder="carType">
+                                <option value="0"
+                                        selected="selected"></option>
+                                <option th:each="type,iter : ${types}" th:value="${iter.index+1}"
+                                        th:text="${type}"></option>
+
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="carDescription">Description:</label>
@@ -117,6 +129,7 @@
     <!-- /.container -->
     <div th:replace="fragment/footer :: footer"></div>
     <script type="application/javascript" th:src="@{/js/car.js}" defer></script>
+    <script type="application/javascript" th:src="@{/js/common.js}" defer></script>
     <script type="application/javascript" th:src="@{/js/validateCarForm.js}" defer></script>
 </body>
 </html>

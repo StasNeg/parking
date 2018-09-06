@@ -35,8 +35,8 @@ $('#modalRegister').on('shown.bs.modal', function (e) {
 })
 $('#modalLogIn').on('shown.bs.modal', function (e) {
   $(".modal-title").text("Sign In");
-  $('#idNumber').val('');
-  $('#email').val('');
+  $('#passwordLogIn').val('');
+  $('#login').val('');
   resetValidation();
 })
 
@@ -46,6 +46,8 @@ var resetValidation = function(){
             $(this).removeClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
             $(this).parents(".form-group" ).removeClass( "has-success" ).removeClass( "has-error" );
         });
+        $("em").each(function(){$(this).hide()});
+        $("#usernamepassword-error").hide();
     }
 
 $(".btnCancel").click(function() {
@@ -104,12 +106,17 @@ function signIn() {
                 'success': function(data, status){
                     if(data.success){
                         redirect(basicUrl+"/user/car");
-                    }else{
-                        alert("Login or password incorrect");
+//                    }else{
+//                        alert("Login or password incorrect");
                     }
                 },
-                'error': function (xhr, status) {
-                    alert("Something went wrong");
+                'error': function (xhr, status, error) {
+                   console.log(xhr.responseText);
+                   var errorData = JSON.parse(xhr.responseText);
+                   console.log("xhr: " + xhr.responseText + " errorData: " + errorData);
+                   $("#usernamepassword-error").text(errorData.exception);
+                   $("#usernamepassword-error").show();
+
                 }
          });
 }

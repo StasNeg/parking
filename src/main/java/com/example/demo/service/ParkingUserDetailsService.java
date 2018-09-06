@@ -21,7 +21,7 @@ public class ParkingUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        User user = userRepository.getUserByEmail(email).get();
+        User user = userRepository.getUserByEmail(email).orElse(null);
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }

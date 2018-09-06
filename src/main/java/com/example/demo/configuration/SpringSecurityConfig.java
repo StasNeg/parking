@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -20,11 +21,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private ParkingUserDetailsService userDetailsService;
 
     private AuthSuccessHandler authSuccessHandler;
+    private AuthFailureHandler authFailureHandler;
 
     @Autowired
-    public SpringSecurityConfig(ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
+    public SpringSecurityConfig(ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler, AuthFailureHandler authFailureHandler ) {
         this.userDetailsService = userDetailsService;
         this.authSuccessHandler = authSuccessHandler;
+        this.authFailureHandler = authFailureHandler;
     }
 
     public SpringSecurityConfig(boolean disableDefaults, ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
@@ -36,8 +39,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable().authorizeRequests().antMatchers("/static/**", "/webjars/**", "/css/**", "/js/**", "/register/**")
+        http.csrf().disable().authorizeRequests().antMatchers("/static/**", "/webjars/**", "/css/**", "/js/**", "/register/**", "/i18n/**", "/")
                 .permitAll()
+                .antMatchers("/user/**").hasRole("USER").anyRequest().authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -46,6 +50,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .successHandler(authSuccessHandler)
+                .failureHandler(authFailureHandler)
                 .permitAll()
                 .and()
                 .logout().logoutUrl("/logout")

@@ -18,22 +18,20 @@ $(".btnAdd").click(function() {
 });
 
 $('#editOrCreate').on('shown.bs.modal', function (e) {
-      jQuery.each( produsers, function( i, val ) {
-        $("#carProducer").append('<option value="'+i+'">'+val+'</option>');
-        });
-      jQuery.each( types, function( i, val ) {
-              console.log(i+": " + val);
-              $("#carType").append('<option value="'+i+'">'+val+'</option>');
-              });
       resetValidation();
 })
 
 
 var resetValidation = function(){
+        $("select").each(function(){
+            $(this).val("0").change();
+        });
         $( "span" ).each(function(){
             $(this).removeClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
             $(this).parents(".form-group" ).removeClass( "has-success" ).removeClass( "has-error" );
         });
+        $("em").each(function(){$(this).hide()});
+//        $(".error").removeClass("error");
     }
 
 $(".btnCancel").click(function() {

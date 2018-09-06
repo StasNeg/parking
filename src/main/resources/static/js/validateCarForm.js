@@ -1,10 +1,10 @@
-
+var carValidator;
 $(document).ready( function () {
-     $( '#validateFormSaveOrEdit' ).validate( {
+     carValidator = $( '#validateFormSaveOrEdit' ).validate( {
         rules: {
             carNumber: "required",
-            carType: "required",
-            carProducer: "required"
+            carType: {selectTypeNotEmpty:"0"},
+            carProducer: {selectTypeNotEmpty:"0"}
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {
@@ -40,4 +40,8 @@ $(document).ready( function () {
          }
     });
 });
+
+$.validator.addMethod("selectTypeNotEmpty", function(value, element,arg){
+  return arg !== value;
+ }, "Value must not be empty arg.");
 
