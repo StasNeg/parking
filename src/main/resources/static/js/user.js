@@ -14,7 +14,7 @@ $(".btnDelete").click(function() {
 
 $(".btnAdd").click(function() {
         console.log("Add new");
-        $(".modal-title").text("Add user");
+
         $('#idNumber').val('');
         $('#email').val('');
         $('#lName').val('');
@@ -24,7 +24,7 @@ $(".btnAdd").click(function() {
 });
 
 $('#modalRegister').on('shown.bs.modal', function (e) {
-      $(".modal-title").text("Register new user");
+
       $('#idNumber').val('');
       $('#email').val('');
       $('#lName').val('');
@@ -34,7 +34,7 @@ $('#modalRegister').on('shown.bs.modal', function (e) {
       resetValidation();
 })
 $('#modalLogIn').on('shown.bs.modal', function (e) {
-  $(".modal-title").text("Sign In");
+
   $('#passwordLogIn').val('');
   $('#login').val('');
   resetValidation();

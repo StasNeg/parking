@@ -3,7 +3,10 @@
 <head th:replace="fragment/header :: head"></head>
 <body>
 <div th:replace="fragment/header :: body"></div>
-<span th:text="#{lang.change}"></span>:
+<script type="text/javascript" th:inline="javascript">
+    var titleAdd = [[#{form.signin.title}]];
+    var titleEdit = [[#{form.signin.title}]];
+</script>
 
 <div class="container">
     <!-- Modal -->
@@ -13,44 +16,41 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title" th:text="#{form.register.title}"></h4>
                 </div>
                 <div class="modal-body">
                     <form id="validateFormRegister" method="post" action="">
                         <div class="form-group">
-                            <label for="email">Email address:</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+                            <label for="email" th:text="#{form.register.email.title}"></label>
+                            <input type="email" class="form-control" id="email" name="email" th:placeholder="#{form.register.email.title.placeholder}"
                                    aria-describedby="emailHelp">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password:</label>
+                            <label for="password" th:text="#{form.register.password}"></label>
                             <input type="password" class="form-control" id="password" name="password"
-                                   placeholder="password">
+                                   th:placeholder="#{form.register.password.placeholder}">
                         </div>
                         <div class="form-group">
-                            <label for="confirm_password">Confirm Password:</label>
+                            <label for="confirm_password" th:text="#{form.register.confirm.password}"></label>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password"
-                                   placeholder="confirm password">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fName">First Name</label>
-                            <input type="text" class="form-control" id="fName" name="fName" placeholder="Enter first name">
+                                   th:placeholder="#{form.register.confirm.password.placeholder}">
                         </div>
                         <div class="form-group">
-                            <label for="lName">Last Name</label>
-                            <input type="text" class="form-control" id="lName" name="lName" placeholder="Enter last name">
+                            <label for="fName" th:text="#{form.register.fname}"></label>
+                            <input type="text" class="form-control" id="fName" name="fName" th:placeholder="#{form.register.fname.placeholder}">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <label for="lName" th:text="#{form.register.lname}"></label>
+                            <input type="text" class="form-control" id="lName" name="lName" th:placeholder="#{form.register.lname.placeholder}">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" th:text="#{form.register.button.save}"></button>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal" th:text="#{form.register.button.close}"></button>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -62,28 +62,28 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"></h4>
+                    <h4 class="modal-title" th:text="#{form.signin.title}"></h4>
                 </div>
                 <div class="modal-body">
                     <form id="validateFormLogIn" method="post" action="">
 
                         <div class="form-group">
-                            <label for="login">Email address:</label>
-                            <input type="text" class="form-control" id="login" name="login" placeholder="Enter Login"
+                            <label for="login" th:text="#{form.signin.email.title}"></label>
+                            <input type="text" class="form-control" id="login" name="login" th:placeholder="#{form.signin.email.field}"
                                    aria-describedby="emailHelp">
                         </div>
                         <div class="form-group">
-                            <label for="passwordLogIn">Password:</label>
+                            <label for="passwordLogIn" th:text="#{form.signin.password.title}"></label>
                             <input type="password" class="form-control" id="passwordLogIn" name="passwordLogIn"
-                                   placeholder="Enter password">
+                                   th:placeholder="#{form.signin.password.field}">
                         </div>
                         <span id="usernamepassword-error" style="display:none" class="error"></span>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default">Sign In</button>
+                            <button type="submit" class="btn btn-default" th:text="#{form.signin.button.signin}"></button>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal" th:text="#{form.signin.button.cancel}"></button>
                     </div>
                 </div>
 

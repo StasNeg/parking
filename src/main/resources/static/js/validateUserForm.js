@@ -26,8 +26,10 @@ $(document).ready( function () {
                 }
         },
         messages: {
-            fName: "Please enter your firstname",
-            lName: "Please enter your lastname",
+            // fName: "Please enter your firstname",
+            fName: titleAdd,
+            // lName: "Please enter your lastname",
+            lName: titleEdit,
             password: {
                 required: "Please provide a password",
                 minlength: "Your password must be at least 5 characters long"
