@@ -4,8 +4,17 @@
 <body>
 <div th:replace="fragment/header :: body"></div>
 <script type="text/javascript" th:inline="javascript">
-    var titleAdd = [[#{form.signin.title}]];
-    var titleEdit = [[#{form.signin.title}]];
+    var form_register_error_email = [[#{form.register.error.email}]];
+    var form_register_error_email_correct = [[#{form.register.error.email.correct}]];
+    var form_register_error_email_dublicate = [[#{form.register.error.email.dublicate}]];
+    var form_register_error_password = [[#{form.register.error.password}]];
+    var form_register_error_firstname_requared = [[#{form.register.error.firstname.requared}]];
+    var form_register_error_lastname_requared = [[#{form.register.error.lastname.requared}]];
+    var form_register_error_password_confirm_equals = [[#{form.register.error.password.confirm.equals}]];
+    var form_register_error_password_confirm_requared = [[#{form.register.error.password.confirm.requared}]];
+    var form_register_error_password_confirm_length = [[#{form.register.error.password.confirm.length}]];
+    var form_register_error_password_length = [[#{form.register.error.password.length}]];
+
 </script>
 
 <div class="container">

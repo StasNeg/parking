@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<li th:fragment="language" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" th:text="#{lang.change}"><span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="?lang=ru" th:text="#{lang.ru}"></a></li>
+        <li><a href="?lang=en" th:text="#{lang.en}"></a></li>
+        <li><a href="?lang=ua" th:text="#{lang.ua}"></a></li>
+    </ul>
+</li>
+
+</body>
+</html>
