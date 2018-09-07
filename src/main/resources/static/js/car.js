@@ -14,7 +14,11 @@ $(".btnDelete").click(function() {
 
 $(".btnAdd").click(function() {
         console.log("Add new");
-        console.log(carsValue);
+
+});
+
+$(".btnEdit").click(function() {
+        console.log("Edit " +this.name);
 });
 
 $('#editOrCreate').on('shown.bs.modal', function (e) {
@@ -31,27 +35,8 @@ var resetValidation = function(){
             $(this).parents(".form-group" ).removeClass( "has-success" ).removeClass( "has-error" );
         });
         $("em").each(function(){$(this).hide()});
-//        $(".error").removeClass("error");
-    }
+ }
 
-$(".btnCancel").click(function() {
-})
-$(".btnEdit").click(function() {
-        console.log("Edit " +this.name);
-        $(".modal-title").text("Edit Current Car");
-        $.ajax({
-                        'type': 'GET',
-                        'url': basicUrl ,
-                        'data': {
-                                id: this.name
-                            },
-                        'success': function(car, status){
-                                $('#idNumber').val(car.id);
-                                $('#carNumber').val(car.number);
-                                $('#description').val(car.description);
-                            }}
-                        );
-});
 
 function saveOrEditUser() {
         $.ajax({

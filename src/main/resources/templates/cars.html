@@ -5,21 +5,19 @@
 <div th:replace="fragment/header :: body"></div>
 <div class="container">
     <div class="starter-template">
-        <h1>Cars</h1>
+        <h1 th:text="#{app.car.title}"></h1>
         <script type="text/javascript" th:inline="javascript">
             var carsValue = [[${cars}]];
-            var produsers = [[${producers}]];
-            var types = [[${types}]]
         </script>
         <div class="table-responsive">
             <table class="table table-bordred table-striped">
                 <tr name="headerTable">
-                    <th>Number</th>
-                    <th>Producer</th>
-                    <th>Model</th>
-                    <th>Type</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th th:text="#{app.car.tittable.number}"></th>
+                    <th th:text="#{app.car.tittable.producer}"></th>
+                    <th th:text="#{app.car.tittable.model}"></th>
+                    <th th:text="#{app.car.tittable.type}"></th>
+                    <th th:text="#{app.car.tittable.edit}"></th>
+                    <th th:text="#{app.car.tittable.delete}"></th>
                 </tr>
                 <tr th:each="car : ${cars}">
                     <td
@@ -27,13 +25,13 @@
                     </td>
 
                     <td
-                            th:text="${car.carDescription.producer}">
+                            th:text="${car.model.producer.name}">
                     </td>
                     <td
-                            th:text="${car.carDescription.name}">
+                            th:text="${car.model.name}">
                     </td>
                     <td
-                            th:text="${car.carDescription.type}">
+                            th:text="${car.model.type}">
                     </td>
                     <td>
                         <button type="button" class="btn btn-primary btn-xs btnEdit" data-title="Edit"
@@ -77,15 +75,15 @@
                             <input type="hidden" class="form-control" id="idNumber">
                         </div>
                         <div class="form-group">
-                            <label for="carNumber">Number:</label>
+                            <label for="carNumber" th:text="#{car.form.number.label}"></label>
                             <input type="text" class="form-control" id="carNumber" name="carNumber"
-                                   placeholder="Enter Car Number"
+                                   th:placeholder="#{car.form.number.placeholder}"
                                    aria-describedby="carNumber">
                         </div>
                         <div class="form-group">
-                            <label for="carProducer">Producer:</label>
+                            <label for="carProducer" th:text="#{car.form.producer.label}"></label>
                             <select class="form-control" id="carProducer" name="carProducer"
-                                    placeholder="carProducer">
+                                    th:placeholder="#{car.form.producer.placeholder}">
                                 <option value="0"
                                         selected="selected"></option>
                                 <option th:each="producer,iter : ${producers}" th:value="${iter.index+1}"
@@ -94,14 +92,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="carName">Model:</label>
+                            <label for="carName" th:text="#{car.form.model.label}"></label>
                             <input type="text" class="form-control" id="carName" name="carName"
-                                   placeholder="carName">
+                                   th:placeholder="#{car.form.model.placeholder}">
                         </div>
                         <div class="form-group">
-                            <label for="carType">Type:</label>
+                            <label for="carType" th:text="#{car.form.type.label}"></label>
                             <select class="form-control" id="carType" name="carType"
-                                    placeholder="carType">
+                                    th:placeholder="#{car.form.type.placeholder}">
                                 <option value="0"
                                         selected="selected"></option>
                                 <option th:each="type,iter : ${types}" th:value="${iter.index+1}"
@@ -110,21 +108,22 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="carDescription">Description:</label>
+                            <label for="carDescription" th:text="#{car.form.description.label}"></label>
                             <input type="text" class="form-control" id="carDescription" name="carDescription"
-                                   placeholder="carDescription">
+                                   th:placeholder="#{car.form.description.placeholder}">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <button type="submit" class="btn btn-default" th:text="#{car.form.button.save}"></button>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal" th:text="#{car.form.button.close}"></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- /.container -->
     <div th:replace="fragment/footer :: footer"></div>

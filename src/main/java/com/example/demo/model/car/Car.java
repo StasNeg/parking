@@ -19,7 +19,6 @@ public class Car extends AbstractBaseEntity {
     @Column(name = "description")
     private String description;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -28,26 +27,40 @@ public class Car extends AbstractBaseEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cartype_id", nullable = false)
+    @JoinColumn(name = "model", nullable = false)
     @NotNull
-    private CarDescription carDescription;
+    private Model model;
 
     public Car() {
     }
 
-    public Car(Long id, String number, String description, @NotNull User user, @NotNull CarDescription carDescription) {
+    public Car(String number, String description, @NotNull Model model) {
+        this.number = number;
+        this.description = description;
+        this.model = model;
+    }
+
+    public Car(Long id, String number, String description, @NotNull Model model) {
+        super(id);
+        this.number = number;
+        this.description = description;
+        this.model = model;
+    }
+
+    public Car(String number, String description, @NotNull User user, @NotNull Model model) {
+
+        this.number = number;
+        this.description = description;
+        this.user = user;
+        this.model = model;
+    }
+
+    public Car(Long id, String number, String description, @NotNull User user, @NotNull Model model) {
         super(id);
         this.number = number;
         this.description = description;
         this.user = user;
-        this.carDescription = carDescription;
-    }
-
-    public Car(String number, String description, @NotNull User user, @NotNull CarDescription carDescription) {
-        this.number = number;
-        this.description = description;
-        this.user = user;
-        this.carDescription = carDescription;
+        this.model = model;
     }
 
     public String getNumber() {
@@ -74,11 +87,12 @@ public class Car extends AbstractBaseEntity {
         this.user = user;
     }
 
-    public CarDescription getCarDescription() {
-        return carDescription;
+    public Model getModel() {
+        return model;
     }
 
-    public void setCarDescription(CarDescription carDescription) {
-        this.carDescription = carDescription;
+    public void setModel(Model model) {
+        this.model = model;
     }
+
 }
