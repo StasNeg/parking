@@ -97,7 +97,6 @@ function signIn() {
         $.ajax({
                 'type': 'POST',
                 'url': basicUrl,
-//                'contentType': 'application/json',
                 'data': {
                     j_password : $('#passwordLogIn').val(),
                     j_username : $('#login').val()
@@ -106,8 +105,6 @@ function signIn() {
                 'success': function(data, status){
                     if(data.success){
                         redirect(basicUrl+"/user/car");
-//                    }else{
-//                        alert("Login or password incorrect");
                     }
                 },
                 'error': function (xhr, status, error) {

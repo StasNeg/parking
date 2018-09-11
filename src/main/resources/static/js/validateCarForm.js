@@ -4,7 +4,8 @@ $(document).ready( function () {
         rules: {
             carNumber: "required",
             carType: {selectTypeNotEmpty:"0"},
-            carProducer: {selectTypeNotEmpty:"0"}
+            carProducer: {selectTypeNotEmpty:"0"},
+            carName: {selectTypeNotEmpty:"0"}
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {
