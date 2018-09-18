@@ -4,15 +4,17 @@ import com.example.demo.model.car.Car;
 import com.example.demo.model.car.Model;
 import com.example.demo.model.car.Producer;
 import com.example.demo.model.enums.Role;
+import com.example.demo.model.place.ParkingPlace;
 import com.example.demo.model.user.User;
 import com.example.demo.repository.CarRepository;
 import com.example.demo.repository.ModelRepository;
+import com.example.demo.repository.ParkingPlaceRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -22,46 +24,32 @@ import java.util.HashSet;
 
 @Component
 @Order(1)
+@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create-drop")
 public class DataBaseInit implements ApplicationRunner {
 
-    @Value("${spring.jpa.hibernate.ddl-auto}")
-    private java.lang.String isInit;
 
     private UserRepository userRepository;
     private CarRepository carRepository;
-//    private CarDescriptionRepository carDescriptionRepository;
     private ModelRepository modelRepository;
-//    private ProducerRepository producerRepository;
+    private ParkingPlaceRepository parkingPlaceRepository;
 
     @Autowired
-    public DataBaseInit(UserRepository userRepository, CarRepository carRepository, ModelRepository modelRepository) {
+    public DataBaseInit(UserRepository userRepository, CarRepository carRepository, ModelRepository modelRepository, ParkingPlaceRepository parkingPlaceRepository) {
         this.userRepository = userRepository;
         this.carRepository = carRepository;
-//        this.carDescriptionRepository = carDescriptionRepository;
         this.modelRepository = modelRepository;
-//        this.producerRepository = producerRepository;
+        this.parkingPlaceRepository = parkingPlaceRepository;
     }
 
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (isInit.equals("none")) return;
-
-//            desc
-//            CarDescription carDescriptionMazda = new CarDescription("Mazda", "CX7", CarType.CROSSOVER);
-//            CarDescription carDescriptionToyota = new CarDescription("Toyota", "RAV4", CarType.CROSSOVER);
-//            CarDescription carDescriptionRenault = new CarDescription("Renault", "Megan", CarType.SEDAN);
-//            producer
-
-        Producer mazda = new Producer("Mazda");
-        Producer toyota = new Producer("Toyota");
-        Producer renault = new Producer("Renault");
 
 //            Model
-        Model modelMazdaCX7 = modelRepository.findByModelName( "CX-7").get();
+        Model modelMazdaCX7 = modelRepository.findByModelName("CX-7").get();
         Model modelMazdaCX9 = modelRepository.findByModelName("CX-9").get();
         Model modelToyotaRAV4 = modelRepository.findByModelName("RAV4").get();
-        Model modelRenaultMegan = modelRepository.findByModelName( "Megane").get();
+        Model modelRenaultMegan = modelRepository.findByModelName("Megane").get();
         Model modelRenaultLogan = modelRepository.findByModelName("Logan").get();
 
 //            users
@@ -73,11 +61,17 @@ public class DataBaseInit implements ApplicationRunner {
         Car car3 = new Car("AK1234BI", "thirth car", user1, modelRenaultLogan);
         Car car4 = new Car("AK1234BE", "first car", user2, modelRenaultMegan);
         Car car5 = new Car("AK1234AA", "second car", user2, modelToyotaRAV4);
+//          place
+        ParkingPlace placeCenter1 = new ParkingPlace("Dmytra Yavornytskoho Avenue", "Dnipro", "19",48.474591,35.018446,"Ukraine");
+        ParkingPlace placeCenter2 = new ParkingPlace("Kniazia Yaroslava Mudroho Street", "Dnipro", "37",48.476205,35.029969,"Ukraine");
+        ParkingPlace placeCenter3 = new ParkingPlace("Kniazia Yaroslava Mudroho Street", "Dnipro", "62",48.477391,35.027263,"Ukraine");
+        ParkingPlace placeCenter4 = new ParkingPlace("Oleksandra Polia Ave", "Dnipro", "23",48.461505,35.027324,"Ukraine");
+        ParkingPlace placeCenter5 = new ParkingPlace("Sicheslavska Naberezhna St", "Dnipro", "19А",48.472079,35.043490,"Ukraine");
+//          tickets
 
         userRepository.saveAll(Arrays.asList(user1, user2));
-//            producerRepository.saveAll(Arrays.asList(mazda,renault,toyota));
-//            modelRepository.saveAll(Arrays.asList(modelMazdaCX7,modelMazdaCX9, modelToyotaRAV4, modelRenaultLogan, modelRenaultMegan));
         carRepository.saveAll(Arrays.asList(car1, car2, car3, car4, car5));
+        parkingPlaceRepository.saveAll(Arrays.asList(placeCenter1,placeCenter2,placeCenter3,placeCenter4,placeCenter5));
     }
 
 

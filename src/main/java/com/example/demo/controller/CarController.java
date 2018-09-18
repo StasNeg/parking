@@ -6,11 +6,13 @@ import com.example.demo.model.enums.CarType;
 import com.example.demo.service.CarServise;
 import com.example.demo.service.ModelService;
 import com.example.demo.service.ProducerService;
+import com.example.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class CarController {
@@ -45,10 +47,22 @@ public class CarController {
     public @ResponseBody
     CarDto saveCar(@RequestBody CarDto car) {
         // This returns a JSON or XML with the users
-
-
-        return  CarDto.asTo(carServise.save(car));
-
-
+        return CarDto.asTo(carServise.save(car));
     }
+
+    @GetMapping(path = "/user/car/uniqueNumber")
+    public @ResponseBody
+    String isUniqueEmail(@RequestParam String carNumber, @RequestParam String id) {
+        Car temp = carServise.getByNumber(carNumber);
+        if (Objects.isNull(temp))
+            return "true";
+        else if (!carNumber.isEmpty() && !id.isEmpty()
+                && temp.getUser().getId().equals(UserUtil.getAutorizedId())
+                && temp.getId().equals(Long.parseLong(id)))
+            return "true";
+        else if (!carNumber.isEmpty() && !temp.getUser().getId().equals(UserUtil.getAutorizedId()))
+            return "true";
+        return "false";
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.demo.model.car;
 
 
 import com.example.demo.model.AbstractBaseEntity;
+import com.example.demo.model.ticket.Ticket;
 import com.example.demo.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
@@ -9,9 +10,10 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
-@Table(name = "cars", uniqueConstraints = {@UniqueConstraint(columnNames = {"number"}, name = "number_unique_car_idx")})
+@Table(name = "cars", uniqueConstraints = {@UniqueConstraint(columnNames = {"number", "user_id"}, name = "number_unique_user_car_idx")})
 public class Car extends AbstractBaseEntity {
     @Column(name = "number", nullable = false)
     private String number;
@@ -30,6 +32,10 @@ public class Car extends AbstractBaseEntity {
     @JoinColumn(name = "model", nullable = false)
     @NotNull
     private Model model;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
+    private List<Ticket> tickets;
 
     public Car() {
     }

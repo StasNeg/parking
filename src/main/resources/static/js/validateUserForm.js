@@ -22,7 +22,8 @@ $(document).ready( function () {
                                 id: function(){return $("#idNumber").val()}
                             },
                             contentType: 'application/json'
-                        }                }
+                        }
+                }
         },
         messages: {
             // fName: "Please enter your firstname",

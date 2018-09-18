@@ -12,6 +12,7 @@ import com.example.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 @Service
@@ -29,8 +30,14 @@ public class CarServise {
         this.userRepository = userRepository;
     }
 
-    public Iterable<Car> getCars() {
-        return carRepository.findAllByUserId(UserUtil.getAutorizedId());
+    public Iterable<CarDto> getCars() {
+        Iterable<CarDto> dtos = new LinkedList<>();
+        for (Car car :carRepository.findAllByUserId(UserUtil.getAutorizedId())
+             ) {
+            ((LinkedList<CarDto>) dtos).add(CarDto.asTo(car));
+
+        }
+        return dtos;
     }
 
     public Car getById(Long id) {
@@ -54,5 +61,9 @@ public class CarServise {
             savedCar.setDescription(car.getDescription());
         }
         return carRepository.save(savedCar);
+    }
+
+    public Car getByNumber(String number) {
+                return carRepository.findByNumber(number).orElse(null);
     }
 }

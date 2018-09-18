@@ -12,31 +12,21 @@ $(".btnDelete").click(function() {
      });
 });
 
-$(".btnAdd").click(function() {
-    console.log("Add new");
-    $("select").each(function(){
-        $(this).val("0").change();
-    });
-    $('#idNumber').val("");
-    $('#carNumber').val("");
-    $('#carDescription').val("");
-});
 
-$(".btnEdit").click(function() {
-    console.log("Edit " +this.name);
-    var id = this.name;
+function edit(id) {
+    console.log("Edit " + id);
     var currentCar = carsValue.filter(function(car){
     return car.id === parseInt(id);});
     currentCar = currentCar[0];
     $('#idNumber').val(id);
     $('#carNumber').val(currentCar.number);
-    $('#carType').val(currentCar.model.type).change();
-    $('#carProducer').val(currentCar.model.producer.name).change();
-    $('#carName').append($("<option></option>").attr("value",currentCar.model.name)
-                                    .text(currentCar.model.name));
-    $('#carName').val(currentCar.model.name).change();
+    $('#carType').val(currentCar.carType).change();
+    $('#carProducer').val(currentCar.producer).change();
+    $('#carName').append($("<option></option>").attr("value",currentCar.model)
+                                    .text(currentCar.model));
+    $('#carName').val(currentCar.model).change();
     $('#carDescription').val(currentCar.description);
-});
+}
 
 $('#editOrCreate').on('shown.bs.modal', function (e) {
     resetValidation();

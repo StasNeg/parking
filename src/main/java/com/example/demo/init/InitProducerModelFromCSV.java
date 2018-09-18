@@ -7,9 +7,9 @@ import com.example.demo.repository.ModelRepository;
 import com.example.demo.repository.ProducerRepository;
 import com.opencsv.CSVReader;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
@@ -18,13 +18,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 @Order(0)
+@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create-drop")
 public class InitProducerModelFromCSV implements ApplicationRunner {
-    @Value("${init.data.csv}")
-    private String isInit;
 
     private ModelRepository modelRepository;
     private ProducerRepository producerRepository;
@@ -37,7 +39,6 @@ public class InitProducerModelFromCSV implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (!isInit.equals("yes")) return;
         File file = new ClassPathResource("cars_csv.csv").getFile();
         try (
                 Reader reader = new BufferedReader(new FileReader(file));

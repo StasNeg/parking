@@ -8,57 +8,23 @@
         <h1 th:text="#{app.car.title}"></h1>
         <script type="text/javascript" th:inline="javascript">
             var carsValue = [[${cars}]];
+            var titNumber = [[#{app.car.tittable.number}]];
+            var titProduser = [[#{app.car.tittable.producer}]];
+            var titModel = [[#{app.car.tittable.model}]];
+            var titType = [[#{app.car.tittable.type}]];
+            var titDescription = [[#{app.car.tittable.description}]];
+            var titEdit = [[#{app.car.tittable.edit}]];
+            var titDelete = [[#{app.car.tittable.delete}]];
         </script>
         <div class="table-responsive">
-            <table class="table table-bordred table-striped">
-                <tr name="headerTable">
-                    <th th:text="#{app.car.tittable.number}"></th>
-                    <th th:text="#{app.car.tittable.producer}"></th>
-                    <th th:text="#{app.car.tittable.model}"></th>
-                    <th th:text="#{app.car.tittable.type}"></th>
-                    <th th:text="#{app.car.tittable.description}"></th>
-                    <th th:text="#{app.car.tittable.edit}"></th>
-                    <th th:text="#{app.car.tittable.delete}"></th>
-                </tr>
-                <tr th:each="car : ${cars}">
-                    <td
-                            th:text="${car.number}">
-                    </td>
-
-                    <td
-                            th:text="${car.model.producer.name}">
-                    </td>
-                    <td
-                            th:text="${car.model.name}">
-                    </td>
-                    <td
-                            th:text="${car.model.type}">
-                    </td>
-                    <td
-                            th:text="${car.description}">
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-xs btnEdit" data-title="Edit"
-                                data-toggle="modal"
-                                data-target="#editOrCreate"
-                                th:name="${car.id}">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-xs btnDelete" data-title="Delete"
-                                th:name="${car.id}">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
-                </tr>
+            <table class="display" id="carTable">
             </table>
+            <button type="button" class="btn btn-danger btn-lg btnAdd" data-title="Add"
+                    data-toggle="modal"
+                    data-target="#editOrCreate">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
         </div>
-        <button type="button" class="btn btn-danger btn-xs btnAdd" data-title="Add"
-                data-toggle="modal"
-                data-target="#editOrCreate">
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
     </div>
 </div>
 

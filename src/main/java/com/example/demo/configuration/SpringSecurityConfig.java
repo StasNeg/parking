@@ -22,12 +22,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private AuthSuccessHandler authSuccessHandler;
     private AuthFailureHandler authFailureHandler;
+    private CustomAccessDeniedHandler customAccessDeniedHandler;
+
 
     @Autowired
-    public SpringSecurityConfig(ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler, AuthFailureHandler authFailureHandler ) {
+    public SpringSecurityConfig(ParkingUserDetailsService userDetailsService,
+                                AuthSuccessHandler authSuccessHandler, AuthFailureHandler authFailureHandler, CustomAccessDeniedHandler customAccessDeniedHandler ) {
         this.userDetailsService = userDetailsService;
         this.authSuccessHandler = authSuccessHandler;
         this.authFailureHandler = authFailureHandler;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
     public SpringSecurityConfig(boolean disableDefaults, ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
@@ -41,9 +45,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable().authorizeRequests().antMatchers("/static/**", "/webjars/**", "/css/**", "/js/**", "/register/**", "/i18n/**", "/")
                 .permitAll()
-                .antMatchers("/user/**").authenticated()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN").anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/")
@@ -52,6 +55,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(authSuccessHandler)
                 .failureHandler(authFailureHandler)
                 .permitAll()
+                .and().exceptionHandling().accessDeniedPage("/")//accessDeniedHandler(customAccessDeniedHandler)
                 .and()
                 .logout().logoutUrl("/logout")
                 .permitAll();
