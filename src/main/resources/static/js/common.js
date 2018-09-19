@@ -5,3 +5,11 @@
                  window.location.replace('?lang=' + selectedOption);
              }
   });
+
+  var resetValidation = function(){
+      $( "span" ).each(function(){
+          $(this).removeClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
+          $(this).parents(".form-group" ).removeClass( "has-success" ).removeClass( "has-error" );
+      });
+      $("em").each(function(){$(this).hide()});
+   }

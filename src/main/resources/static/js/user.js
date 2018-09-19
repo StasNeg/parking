@@ -40,18 +40,6 @@ $('#modalLogIn').on('shown.bs.modal', function (e) {
   resetValidation();
 })
 
-
-var resetValidation = function(){
-        $( "span" ).each(function(){
-            $(this).removeClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
-            $(this).parents(".form-group" ).removeClass( "has-success" ).removeClass( "has-error" );
-        });
-        $("em").each(function(){$(this).hide()});
-        $("#usernamepassword-error").hide();
-    }
-
-$(".btnCancel").click(function() {
-})
 $(".btnEdit").click(function() {
         console.log("Edit " +this.name);
         $(".modal-title").text("Edit user");
