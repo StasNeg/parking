@@ -2,10 +2,18 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="head">
     <meta http-equiv="Content-Type" content="application/html; charset=UTF-8"/>
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/datatables/1.10.15/media/css/jquery.dataTables.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" href="../../../css/main.css"/>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+
 
     <script type="application/javascript" th:src="@{/webjars/jquery/3.2.1/dist/jquery.min.js}" defer></script>
     <script type="application/javascript" th:src="@{/js/jquery.validate.min.js}" defer></script>

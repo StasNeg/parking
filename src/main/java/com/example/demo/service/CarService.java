@@ -16,14 +16,14 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 @Service
-public class CarServise {
+public class CarService {
     private CarRepository carRepository;
     private ProducerRepository producerRepository;
     private ModelRepository modelRepository;
     private UserRepository userRepository;
 
     @Autowired
-    public CarServise(CarRepository carRepository, ProducerRepository producerRepository, ModelRepository modelRepository, UserRepository userRepository) {
+    public CarService(CarRepository carRepository, ProducerRepository producerRepository, ModelRepository modelRepository, UserRepository userRepository) {
         this.carRepository = carRepository;
         this.producerRepository = producerRepository;
         this.modelRepository = modelRepository;

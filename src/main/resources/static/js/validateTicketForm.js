@@ -1,4 +1,8 @@
-
+var basicUrl = 'http://localhost:8080/user/ticket';
+var map;
+var ui;
+var behavior;
+var group;
 $(document).ready( function () {
     var table = $('#ticketTable').DataTable(
      {
@@ -55,6 +59,25 @@ $(document).ready( function () {
          }
      );
 
+
+
+
+    var platform = new H.service.Platform({
+       'app_id': 'IMKvUNuOHPm9m6STg3ax',
+       'app_code': 'nFMkNnKiTHe_BkWaKjI_JA'
+     });
+    var maptypes = platform.createDefaultLayers();
+    map = new H.Map(
+      document.getElementById('map'),
+      maptypes.normal.map,
+      {
+        zoom: 13,
+        center: { lng:  35.018446, lat:48.474591 }
+      });
+    ui = H.ui.UI.createDefault(map, maptypes);
+    behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+    group = new H.map.Group();
+    map.addObject(group);
      $( '#validateFormSaveOrEdit' ).validate( {
         rules: {
             carNumber: {

@@ -4,13 +4,30 @@ import com.example.demo.model.ticket.Ticket;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TicketDto {
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
 
     private Long id;
 
-    public TicketDto(Long id, String street, String country, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
-        this.id = id;
+    private final String street;
+
+    private final String country;
+
+    private final String city;
+    private final String streetNumber;
+
+    @JsonFormat(pattern = DATE_TIME_PATTERN, timezone = "UTC")
+    private final LocalDateTime dateTimeStart;
+
+    @JsonFormat(pattern = DATE_TIME_PATTERN, timezone = "UTC")
+    private final LocalDateTime dateTimeEnd;
+
+    private final String carNumber;
+    private final CarDto car;
+    public TicketDto(String street, String country, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
         this.street = street;
         this.country = country;
         this.city = city;
@@ -20,21 +37,8 @@ public class TicketDto {
         this.carNumber = carNumber;
         this.car = car;
     }
-
-    private final String street;
-
-    private final String country;
-    private final String city;
-    private final String streetNumber;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
-    private final LocalDateTime dateTimeStart;
-
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
-    private final LocalDateTime dateTimeEnd;
-    private final String carNumber;
-    private final CarDto car;
-    public TicketDto(String street, String country, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
+    public TicketDto(Long id, String street, String country, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
+        this.id = id;
         this.street = street;
         this.country = country;
         this.city = city;

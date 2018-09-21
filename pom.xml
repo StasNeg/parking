@@ -120,6 +120,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/jquery-gmap-min -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>jquery-gmap-min</artifactId>
+			<version>2.1.6-2</version>
+		</dependency>
 
 	</dependencies>
 

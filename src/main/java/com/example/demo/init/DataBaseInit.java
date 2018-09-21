@@ -71,12 +71,13 @@ public class DataBaseInit implements ApplicationRunner {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Ticket ticket1 = new Ticket(car1, placeCenter1, LocalDateTime.parse("2018-09-17 11:30", formatter), LocalDateTime.parse("2018-09-17 12:30", formatter), 12);
         Ticket ticket2 = new Ticket(car2, placeCenter2, LocalDateTime.parse("2018-09-17 10:08", formatter), LocalDateTime.parse("2018-09-17 12:30", formatter), 12);
-        Ticket ticket3 = new Ticket(car3, placeCenter2, LocalDateTime.parse("2018-09-18 22:00", formatter), LocalDateTime.parse("2018-09-24 23:30", formatter), 12);
+        Ticket ticket3 = new Ticket(car3, placeCenter3, LocalDateTime.parse("2018-09-18 22:00", formatter), LocalDateTime.parse("2018-09-24 23:30", formatter), 12);
+        Ticket ticket4 = new Ticket(car4, placeCenter3, LocalDateTime.parse("2018-09-18 22:00", formatter), LocalDateTime.parse("2018-09-24 23:30", formatter), 12);
 
         userRepository.saveAll(Arrays.asList(user1, user2));
         carRepository.saveAll(Arrays.asList(car1, car2, car3, car4, car5));
         parkingPlaceRepository.saveAll(Arrays.asList(placeCenter1, placeCenter2, placeCenter3, placeCenter4, placeCenter5));
-        ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3));
+        ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3,ticket4));
     }
 
 
