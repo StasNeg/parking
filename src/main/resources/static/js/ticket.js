@@ -1,25 +1,5 @@
 $('#editOrCreate').on('shown.bs.modal', function (e) {
     resetValidation();
-    $.ajax({
-        'type': 'get',
-        'url': basicUrl + "/countryAndCity",
-        'contentType': 'application/json',
-        'success': function (data, status) {
-            $.each(data.countryAndCity.Ukraine, function (iter, city) {
-                $('#city').append($("<option></option>").attr("value", city)
-                    .text(city));
-            });
-            $.each(data.cars, function (iter, car) {
-                $('#car').append($("<option></option>").attr("value", car.id)
-                    .text(car.number + " " + car.producer + ", " + car.model));
-            });
-        },
-        'error': function (xhr, status) {
-            alert(xhr.responseJSON.message);
-        }
-    });
-
-
 })
 
 function saveOrEditTicket() {
@@ -54,9 +34,7 @@ function addInfoBubble(map, coordinates, html) {
             // read custom data
             content: evt.target.getData()
         });
-        ui.getBubbles().forEach(function (bubble) {
-            ui.removeBubble(bubble);
-        });
+        removeBubbles();
         // show info bubble
         ui.addBubble(bubble);
     }, false);
@@ -70,9 +48,7 @@ $('#googleMap').on('shown.bs.modal', function (e) {
     group.getObjects().forEach( function (object) {
         group.removeObject(object);
     });
-    ui.getBubbles().forEach(function (bubble) {
-        ui.removeBubble(bubble);
-    });
+    removeBubbles();
     $.ajax({
         'type': 'get',
         'url': basicUrl + "/placeByCity",
@@ -95,15 +71,26 @@ function showMap(places) {
     $.each(places, function (key, value) {
         coord.push({lat: value.lat, lng: value.lng});
         text.push('<button type="button" class="btn btn-default btnMapSubmit" id="' + value.id + '">'
-            + value.street + ', ' + value.streetNumber +
+            + value.name + ', ' + value.streetNumber +
             '</button>');
     });
+    var currentCity = cities.filter(function(item){
+        return item.id===parseInt($('#city').val());
+     });
+    map.setCenter({lat:currentCity[0].lat, lng:currentCity[0].lng});
+    map.setZoom(12);
     map.getViewPort().resize();
     addInfoBubble(map, coord, text);
 }
 
 $(document).on('click','.btnMapSubmit', function (e) {
-    console.log(e.target.innerText);
+//    console.log(e.target.innerText);
     $("#googleMap").modal('hide');
     $("#address").val(e.target.innerText);
 })
+
+function removeBubbles(){
+    ui.getBubbles().forEach(function (bubble) {
+        ui.removeBubble(bubble);
+    });
+}

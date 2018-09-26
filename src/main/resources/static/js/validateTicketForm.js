@@ -3,6 +3,9 @@ var map;
 var ui;
 var behavior;
 var group;
+var cities;
+var cars;
+
 $(document).ready(function () {
     var table = $('#ticketTable').DataTable(
         {
@@ -75,11 +78,8 @@ $(document).ready(function () {
     var maptypes = platform.createDefaultLayers();
     map = new H.Map(
         document.getElementById('map'),
-        maptypes.normal.map,
-        {
-            zoom: 13,
-            center: {lng: 35.018446, lat: 48.474591}
-        });
+            maptypes.normal.map
+        );
     ui = H.ui.UI.createDefault(map, maptypes);
     behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
     group = new H.map.Group();
@@ -143,6 +143,28 @@ $(document).ready(function () {
             saveOrEditCar();
         }
     });
+
+    $.ajax({
+            'type': 'get',
+            'url': basicUrl + "/cities",
+            'contentType': 'application/json',
+            'success': function (data, status) {
+                cities = data.city;
+                cars = data.cars;
+                $.each(data.city, function (iter, city) {
+                    $('#city').append($("<option></option>").attr("value", city.id)
+                        .text(city.name));
+                });
+                $.each(data.cars, function (iter, car) {
+                    $('#car').append($("<option></option>").attr("value", car.id)
+                        .text(car.number + " " + car.producer + ", " + car.model));
+                });
+            },
+            'error': function (xhr, status) {
+                alert(xhr.responseJSON.message);
+            }
+        });
+
 });
 
 $.validator.addMethod("selectTypeNotEmpty", function (value, element, arg) {

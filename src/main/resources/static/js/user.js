@@ -1,6 +1,6 @@
 var basicUrl = 'http://localhost:8080';
 $(".btnDelete").click(function() {
-        console.log("Delete " +this.name);
+//        console.log("Delete " +this.name);
         $.ajax({
                         'type': 'DELETE',
                         'url': basicUrl + "/user/delete?id="+this.name,
@@ -13,7 +13,7 @@ $(".btnDelete").click(function() {
 });
 
 $(".btnAdd").click(function() {
-        console.log("Add new");
+//        console.log("Add new");
 
         $('#idNumber').val('');
         $('#email').val('');
@@ -41,7 +41,7 @@ $('#modalLogIn').on('shown.bs.modal', function (e) {
 })
 
 $(".btnEdit").click(function() {
-        console.log("Edit " +this.name);
+//        console.log("Edit " +this.name);
         $(".modal-title").text("Edit user");
         $.ajax({
                         'type': 'GET',
@@ -96,9 +96,9 @@ function signIn() {
                     }
                 },
                 'error': function (xhr, status, error) {
-                   console.log(xhr.responseText);
+//                   console.log(xhr.responseText);
                    var errorData = JSON.parse(xhr.responseText);
-                   console.log("xhr: " + xhr.responseText + " errorData: " + errorData);
+//                   console.log("xhr: " + xhr.responseText + " errorData: " + errorData);
                    $("#usernamepassword-error").text(errorData.exception);
                    $("#usernamepassword-error").show();
 

@@ -11,11 +11,13 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.Objects;
 
 @Service
+@Transactional(readOnly = true)
 public class CarService {
     private CarRepository carRepository;
     private ProducerRepository producerRepository;

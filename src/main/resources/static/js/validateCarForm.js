@@ -1,6 +1,6 @@
 var carValidator;
 $(document).ready( function () {
-     console.log(carsValue);
+//     console.log(carsValue);
     var table = $('#carTable').DataTable(
      {
            data:carsValue,
@@ -70,7 +70,7 @@ $(document).ready( function () {
          edit(data.id);
          } );
      $(".btnAdd").on('click',function() {
-         console.log("Add new");
+//         console.log("Add new");
          $("#editOrCreate select").each(function(){
              $(this).val("0").change();
          });

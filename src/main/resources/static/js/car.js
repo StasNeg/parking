@@ -1,6 +1,6 @@
 var basicUrl = 'http://localhost:8080/user/car';
 $(".btnDelete").click(function() {
-    console.log("Delete " +this.name);
+//    console.log("Delete " +this.name);
     $.ajax({
         'type': 'DELETE',
         'url': basicUrl + "/delete?id="+this.name,
@@ -14,7 +14,7 @@ $(".btnDelete").click(function() {
 
 
 function edit(id) {
-    console.log("Edit " + id);
+//    console.log("Edit " + id);
     var currentCar = carsValue.filter(function(car){
     return car.id === parseInt(id);});
     currentCar = currentCar[0];

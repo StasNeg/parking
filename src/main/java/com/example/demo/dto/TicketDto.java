@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.car.Car;
 import com.example.demo.model.ticket.Ticket;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,9 +15,8 @@ public class TicketDto {
 
     private final String street;
 
-    private final String country;
-
     private final String city;
+
     private final String streetNumber;
 
     @JsonFormat(pattern = DATE_TIME_PATTERN, timezone = "UTC")
@@ -27,9 +27,20 @@ public class TicketDto {
 
     private final String carNumber;
     private final CarDto car;
-    public TicketDto(String street, String country, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
+
+    public TicketDto(Long id, String street, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, Car car) {
+        this.id = id;
         this.street = street;
-        this.country = country;
+        this.city = city;
+        this.streetNumber = streetNumber;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.carNumber = carNumber;
+        this.car = CarDto.asTo(car);
+    }
+
+    public TicketDto(String street, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
+        this.street = street;
         this.city = city;
         this.streetNumber = streetNumber;
         this.dateTimeStart = dateTimeStart;
@@ -37,10 +48,10 @@ public class TicketDto {
         this.carNumber = carNumber;
         this.car = car;
     }
-    public TicketDto(Long id, String street, String country, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
+
+    public TicketDto(Long id, String street, String city, String streetNumber, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String carNumber, CarDto car) {
         this.id = id;
         this.street = street;
-        this.country = country;
         this.city = city;
         this.streetNumber = streetNumber;
         this.dateTimeStart = dateTimeStart;
@@ -59,10 +70,6 @@ public class TicketDto {
 
     public String getStreet() {
         return street;
-    }
-
-    public String getCountry() {
-        return country;
     }
 
     public String getCity() {
@@ -90,7 +97,9 @@ public class TicketDto {
     }
 
     public static TicketDto asTo(Ticket ticket) {
-        return new TicketDto(ticket.getId(),ticket.getParkingPlace().getStreet(), ticket.getParkingPlace().getCountry(), ticket.getParkingPlace().getCity(),
+        String city = ticket.getParkingPlace().getStreet().getCity().getCities().size() == 0 ? "No city" : ticket.getParkingPlace().getStreet().getCity().getCities().get(0).getName();
+        String street = ticket.getParkingPlace().getStreet().getStreetI18ns().size() == 0 ? "No Street name in that local" : ticket.getParkingPlace().getStreet().getStreetI18ns().get(0).getName();
+        return new TicketDto(ticket.getId(), street, city,
                 ticket.getParkingPlace().getStreetNumber(), ticket.getDateTimeStart(), ticket.getDateTimeEnd(), ticket.getCar().getNumber(), CarDto.asTo(ticket.getCar()));
     }
 }

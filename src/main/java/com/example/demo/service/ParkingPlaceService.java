@@ -1,13 +1,18 @@
 package com.example.demo.service;
 
-import com.example.demo.model.place.ParkingPlace;
+import com.example.demo.dto.ParkingPlaceDto;
+import com.example.demo.model.enums.Language;
 import com.example.demo.repository.ParkingPlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class ParkingPlaceService {
 
     private ParkingPlaceRepository parkingPlaceRepository;
@@ -17,21 +22,13 @@ public class ParkingPlaceService {
         this.parkingPlaceRepository = parkingPlaceRepository;
     }
 
-
-    public Map<String, Set<String>> getAllCountryAndCity() {
-        Iterable<Object> fromRepo = parkingPlaceRepository.getCountryAndCity();
-        Map<String, Set<String>> result = new HashMap<>();
-        for (Object o: fromRepo) {
-            String city = (String) (((Object[])o)[0]);
-            String county = (String) (((Object[])o)[1]);
-            Set<String> temp = result.getOrDefault(county, new HashSet<>());
-            temp.add(city);
-            if(temp.size()==1) result.put(county,temp);
-        }
-       return result;
-    }
-
-    public Iterable<ParkingPlace> getAllByCity(String city) {
-        return parkingPlaceRepository.getAllByCity(city);
+    // TODO: 9/26/2018 rewrite to DTO in Select query 
+    public Iterable<ParkingPlaceDto> getAllByCity(String id) {
+        List<ParkingPlaceDto> parkingPlaceDtos = new LinkedList<>();
+        parkingPlaceRepository.getAllById(Long.parseLong(id), Language.valueOf(LocaleContextHolder.getLocale().getLanguage().toUpperCase())).
+                forEach(item -> parkingPlaceDtos.add(
+                        new ParkingPlaceDto(item.getId(), item.getStreet().getStreetI18ns().get(0).getName(), item.getStreetNumber(),
+                                item.getLat(), item.getLng())));
+        return parkingPlaceDtos;
     }
 }

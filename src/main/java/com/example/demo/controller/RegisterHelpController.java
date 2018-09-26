@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(path = "/register") // This means URL's start with /demo (after Application path)
 public class RegisterHelpController {
-
-
     private UserService userService;
 
     @Autowired
@@ -31,7 +29,6 @@ public class RegisterHelpController {
             return "true";
         return "false";
     }
-
 
 
 }
