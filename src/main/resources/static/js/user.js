@@ -1,6 +1,6 @@
 var basicUrl = 'http://localhost:8080';
 $(".btnDelete").click(function() {
-        console.log("Delete " +this.name);
+//        console.log("Delete " +this.name);
         $.ajax({
                         'type': 'DELETE',
                         'url': basicUrl + "/user/delete?id="+this.name,
@@ -13,7 +13,7 @@ $(".btnDelete").click(function() {
 });
 
 $(".btnAdd").click(function() {
-        console.log("Add new");
+//        console.log("Add new");
 
         $('#idNumber').val('');
         $('#email').val('');
@@ -40,20 +40,8 @@ $('#modalLogIn').on('shown.bs.modal', function (e) {
   resetValidation();
 })
 
-
-var resetValidation = function(){
-        $( "span" ).each(function(){
-            $(this).removeClass( "glyphicon-ok" ).removeClass( "glyphicon-remove" );
-            $(this).parents(".form-group" ).removeClass( "has-success" ).removeClass( "has-error" );
-        });
-        $("em").each(function(){$(this).hide()});
-        $("#usernamepassword-error").hide();
-    }
-
-$(".btnCancel").click(function() {
-})
 $(".btnEdit").click(function() {
-        console.log("Edit " +this.name);
+//        console.log("Edit " +this.name);
         $(".modal-title").text("Edit user");
         $.ajax({
                         'type': 'GET',
@@ -97,7 +85,6 @@ function signIn() {
         $.ajax({
                 'type': 'POST',
                 'url': basicUrl,
-//                'contentType': 'application/json',
                 'data': {
                     j_password : $('#passwordLogIn').val(),
                     j_username : $('#login').val()
@@ -106,14 +93,12 @@ function signIn() {
                 'success': function(data, status){
                     if(data.success){
                         redirect(basicUrl+"/user/car");
-//                    }else{
-//                        alert("Login or password incorrect");
                     }
                 },
                 'error': function (xhr, status, error) {
-                   console.log(xhr.responseText);
+//                   console.log(xhr.responseText);
                    var errorData = JSON.parse(xhr.responseText);
-                   console.log("xhr: " + xhr.responseText + " errorData: " + errorData);
+//                   console.log("xhr: " + xhr.responseText + " errorData: " + errorData);
                    $("#usernamepassword-error").text(errorData.exception);
                    $("#usernamepassword-error").show();
 

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="fragment/header :: head">
+</head>
+<body>
+<div th:replace="fragment/header :: body"></div>
+<div class="container">
+    <div class="starter-template">
+        <h1 th:text="#{app.tickets.title}"></h1>
+        <script type="text/javascript" th:inline="javascript">
+        </script>
+        <div class="table-responsive">
+            <table class="display" id="ticketTable">
+            </table>
+            <button type="button" class="btn btn-danger btn-lg btnAdd" data-title="Add"
+                    data-toggle="modal"
+                    data-target="#editOrCreate">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" id="editOrCreate" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="validateFormSaveOrEdit" method="post" action="">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="idNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="car" th:text="#{ticket.form.car.label}"></label>
+                            <select class="form-control" id="car" name="car">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city" th:text="#{ticket.form.city.label}"></label>
+                            <select class="form-control" id="city" name="city"
+                                    th:placeholder="#{ticket.form.city.placeholder}">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" th:text="#{ticket.form.address.label}"></label>
+                            <input type="text" class="form-control" id="address" disabled
+                                   th:placeholder="#{ticket.form.address.placeholder}"/>
+                            <div>
+                                <button type="button" class="btn btn-default"
+                                        data-toggle="modal"
+                                        data-target="#googleMap"
+                                >Select address
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepickerStart'>
+                                <input type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepickerEnd'>
+                                <input type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" th:text="#{ticket.form.button.save}"></button>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal"
+                                th:text="#{ticket.form.button.close}"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" tabindex="-1" id="googleMap" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body" style="with:300px;height:400px">
+                    <div id="main">
+                        <div id="map"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" th:text="#{ticket.form.button.save}"></button>
+                    <button type="button" class="btn btn-default btnCancel" data-dismiss="modal"
+                            th:text="#{ticket.form.button.close}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+<div th:replace="fragment/footer :: footer"></div>
+
+
+
+<script type="application/javascript" th:src="@{/js/validateTicketForm.js}" defer></script>
+<script type="application/javascript" th:src="@{/js/ticket.js}" defer></script>
+
+
+</body>
+</html>

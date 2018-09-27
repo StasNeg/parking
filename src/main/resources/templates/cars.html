@@ -5,58 +5,26 @@
 <div th:replace="fragment/header :: body"></div>
 <div class="container">
     <div class="starter-template">
-        <h1>Cars</h1>
+        <h1 th:text="#{app.car.title}"></h1>
         <script type="text/javascript" th:inline="javascript">
             var carsValue = [[${cars}]];
-            var produsers = [[${producers}]];
-            var types = [[${types}]]
+            var titNumber = [[#{app.car.tittable.number}]];
+            var titProduser = [[#{app.car.tittable.producer}]];
+            var titModel = [[#{app.car.tittable.model}]];
+            var titType = [[#{app.car.tittable.type}]];
+            var titDescription = [[#{app.car.tittable.description}]];
+            var titEdit = [[#{app.car.tittable.edit}]];
+            var titDelete = [[#{app.car.tittable.delete}]];
         </script>
         <div class="table-responsive">
-            <table class="table table-bordred table-striped">
-                <tr name="headerTable">
-                    <th>Number</th>
-                    <th>Producer</th>
-                    <th>Model</th>
-                    <th>Type</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                <tr th:each="car : ${cars}">
-                    <td
-                            th:text="${car.number}">
-                    </td>
-
-                    <td
-                            th:text="${car.carDescription.producer}">
-                    </td>
-                    <td
-                            th:text="${car.carDescription.name}">
-                    </td>
-                    <td
-                            th:text="${car.carDescription.type}">
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-xs btnEdit" data-title="Edit"
-                                data-toggle="modal"
-                                data-target="#editOrCreate"
-                                th:name="${car.id}">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-xs btnDelete" data-title="Delete"
-                                th:name="${car.id}">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </td>
-                </tr>
+            <table class="display" id="carTable">
             </table>
+            <button type="button" class="btn btn-danger btn-lg btnAdd" data-title="Add"
+                    data-toggle="modal"
+                    data-target="#editOrCreate">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
         </div>
-        <button type="button" class="btn btn-danger btn-xs btnAdd" data-title="Add"
-                data-toggle="modal"
-                data-target="#editOrCreate">
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
     </div>
 </div>
 
@@ -77,59 +45,62 @@
                             <input type="hidden" class="form-control" id="idNumber">
                         </div>
                         <div class="form-group">
-                            <label for="carNumber">Number:</label>
+                            <label for="carNumber" th:text="#{car.form.number.label}"></label>
                             <input type="text" class="form-control" id="carNumber" name="carNumber"
-                                   placeholder="Enter Car Number"
+                                   th:placeholder="#{car.form.number.placeholder}"
                                    aria-describedby="carNumber">
                         </div>
                         <div class="form-group">
-                            <label for="carProducer">Producer:</label>
+                            <label for="carProducer" th:text="#{car.form.producer.label}"></label>
                             <select class="form-control" id="carProducer" name="carProducer"
-                                    placeholder="carProducer">
+                                    th:placeholder="#{car.form.producer.placeholder}">
                                 <option value="0"
                                         selected="selected"></option>
-                                <option th:each="producer,iter : ${producers}" th:value="${iter.index+1}"
-                                        th:text="${producer}"></option>
+                                <option th:each="producer,iter : ${producers}" th:value="${producer.name}"
+                                        th:text="${producer.name}"></option>
 
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="carName">Model:</label>
-                            <input type="text" class="form-control" id="carName" name="carName"
-                                   placeholder="carName">
-                        </div>
-                        <div class="form-group">
-                            <label for="carType">Type:</label>
-                            <select class="form-control" id="carType" name="carType"
-                                    placeholder="carType">
+                            <label for="carName" th:text="#{car.form.model.label}"></label>
+                            <select class="form-control" id="carName" name="carName">
                                 <option value="0"
                                         selected="selected"></option>
-                                <option th:each="type,iter : ${types}" th:value="${iter.index+1}"
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="carType" th:text="#{car.form.type.label}"></label>
+                            <select class="form-control" id="carType" name="carType"
+                                    th:placeholder="#{car.form.type.placeholder}">
+                                <option value="0"
+                                        selected="selected"></option>
+                                <option th:each="type,iter : ${types}" th:value="${type}"
                                         th:text="${type}"></option>
 
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="carDescription">Description:</label>
+                            <label for="carDescription" th:text="#{car.form.description.label}"></label>
                             <input type="text" class="form-control" id="carDescription" name="carDescription"
-                                   placeholder="carDescription">
+                                   th:placeholder="#{car.form.description.placeholder}">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <button type="submit" class="btn btn-default" th:text="#{car.form.button.save}" ></button>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btnCancel" data-dismiss="modal" th:text="#{car.form.button.close}"></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- /.container -->
     <div th:replace="fragment/footer :: footer"></div>
-    <script type="application/javascript" th:src="@{/js/car.js}" defer></script>
-    <script type="application/javascript" th:src="@{/js/common.js}" defer></script>
     <script type="application/javascript" th:src="@{/js/validateCarForm.js}" defer></script>
+    <script type="application/javascript" th:src="@{/js/car.js}" defer></script>
+
 </body>
 </html>

@@ -6,8 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CarRepository extends CrudRepository<Car, Long> {
-    @Query("select car from Car car left join fetch car.carDescription where car.user.id =:id")
+    @Query("select car from Car car join fetch car.model m join fetch m.producer where car.user.id =:id")
     Iterable<Car> findAllByUserId(Long id);
+
+    Optional<Car> findByNumber(String number);
 }

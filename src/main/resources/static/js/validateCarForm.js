@@ -1,10 +1,85 @@
 var carValidator;
 $(document).ready( function () {
+    var table = $('#carTable').DataTable(
+     {
+           data:carsValue,
+            "columns": [
+                        { "data": "id",
+                          "visible": false
+                         },
+
+                        { title: titNumber,
+                        "data": "number" },
+
+                        {title: titProduser,
+                        "data": "producer" },
+                        {title: titType,
+                        "data": "carType" },
+
+                        {title: titModel,
+                        "data": "model" },
+
+                        {title: titDescription,
+                         "data": "description" },
+
+                        {title: titEdit,
+                             "targets": -1,
+                             "data": null,
+                             "defaultContent": '<button type="button" name = "btnEdit" class="btn btn-primary btn-xs" data-title="Edit" '+
+                                                'data-toggle="modal" data-target="#editOrCreate"> ' +
+                                                '<span class="glyphicon glyphicon-pencil"></span> ' +
+                                                '</button>'
+                        },
+                        {title: titDelete,
+                             "targets": -1,
+                             "data": null,
+                             "defaultContent": '<button type="button" name = "btnDelete" class="btn btn-danger btn-xs btnDelete" data-title="Delete"> ' +
+                                                                            '<span class="glyphicon glyphicon-trash"></span></button>'
+                        }
+
+                    ],
+                    "language": {
+                        "url":dataTableI18n[locale]
+                    }
+
+         }
+     );
+     $('#carTable tbody').on( 'click', '[name= "btnEdit"]', function () {
+         var data = table.row( $(this).parents('tr') ).data();
+         edit(data.id);
+         } );
+     $(".btnAdd").on('click',function() {
+//         console.log("Add new");
+         $("#editOrCreate select").each(function(){
+             $(this).val("0").change();
+         });
+         $('#idNumber').val("");
+         $('#carNumber').val("");
+         $('#carDescription').val("");
+     });
      carValidator = $( '#validateFormSaveOrEdit' ).validate( {
         rules: {
-            carNumber: "required",
+            carNumber: {
+                required: true,
+                remote: {
+                    url: basicUrl + "/uniqueNumber",
+                    dataType:'json',
+                    data:{
+                        id: function(){return $("#idNumber").val()}
+                    },
+                    contentType: 'application/json'
+                }
+            },
             carType: {selectTypeNotEmpty:"0"},
-            carProducer: {selectTypeNotEmpty:"0"}
+            carProducer: {selectTypeNotEmpty:"0"},
+            carName: {selectTypeNotEmpty:"0"}
+        },
+        messages: {
+            carNumber:{
+
+              required: "Requared number",
+              remote: "notUnique car Number"
+            }
         },
         errorElement: "em",
         errorPlacement: function ( error, element ) {

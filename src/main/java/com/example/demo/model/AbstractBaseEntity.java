@@ -10,7 +10,7 @@ public abstract class AbstractBaseEntity implements Serializable {
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "global_seq")
     @Access(value = AccessType.PROPERTY)
     protected Long id;
 

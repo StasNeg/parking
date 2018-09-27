@@ -27,20 +27,22 @@ $(document).ready( function () {
         },
         messages: {
             // fName: "Please enter your firstname",
-            fName: titleAdd,
+            fName: form_register_error_firstname_requared,
             // lName: "Please enter your lastname",
-            lName: titleEdit,
+            lName: form_register_error_lastname_requared,
             password: {
-                required: "Please provide a password",
-                minlength: "Your password must be at least 5 characters long"
+                required: form_register_error_password,
+                minlength: form_register_error_password_length
             },
             confirm_password: {
-                required: "Please provide a password",
-                minlength: "Your password must be at least 5 characters long",
-                equalTo: "Please enter the same password as above"
+                required: form_register_error_password_confirm_requared,
+                minlength: form_register_error_password_confirm_length,
+                equalTo: form_register_error_password_confirm_equals
             },
             email:{
-              remote: "The email is already in use!",
+              email: form_register_error_email_correct,
+              required: form_register_error_email,
+              remote: form_register_error_email_dublicate
             }
         },
         errorElement: "em",

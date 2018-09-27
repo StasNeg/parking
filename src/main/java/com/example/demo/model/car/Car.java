@@ -2,6 +2,7 @@ package com.example.demo.model.car;
 
 
 import com.example.demo.model.AbstractBaseEntity;
+import com.example.demo.model.ticket.Ticket;
 import com.example.demo.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
@@ -9,16 +10,16 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
-@Table(name = "cars", uniqueConstraints = {@UniqueConstraint(columnNames = {"number"}, name = "number_unique_car_idx")})
+@Table(name = "cars", uniqueConstraints = {@UniqueConstraint(columnNames = {"number", "user_id"}, name = "number_unique_user_car_idx")})
 public class Car extends AbstractBaseEntity {
     @Column(name = "number", nullable = false)
     private String number;
 
     @Column(name = "description")
     private String description;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -28,26 +29,44 @@ public class Car extends AbstractBaseEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cartype_id", nullable = false)
+    @JoinColumn(name = "model", nullable = false)
     @NotNull
-    private CarDescription carDescription;
+    private Model model;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")//, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
+    private List<Ticket> tickets;
 
     public Car() {
     }
 
-    public Car(Long id, String number, String description, @NotNull User user, @NotNull CarDescription carDescription) {
+    public Car(String number, String description, @NotNull Model model) {
+        this.number = number;
+        this.description = description;
+        this.model = model;
+    }
+
+    public Car(Long id, String number, String description, @NotNull Model model) {
+        super(id);
+        this.number = number;
+        this.description = description;
+        this.model = model;
+    }
+
+    public Car(String number, String description, @NotNull User user, @NotNull Model model) {
+
+        this.number = number;
+        this.description = description;
+        this.user = user;
+        this.model = model;
+    }
+
+    public Car(Long id, String number, String description, @NotNull User user, @NotNull Model model) {
         super(id);
         this.number = number;
         this.description = description;
         this.user = user;
-        this.carDescription = carDescription;
-    }
-
-    public Car(String number, String description, @NotNull User user, @NotNull CarDescription carDescription) {
-        this.number = number;
-        this.description = description;
-        this.user = user;
-        this.carDescription = carDescription;
+        this.model = model;
     }
 
     public String getNumber() {
@@ -74,11 +93,12 @@ public class Car extends AbstractBaseEntity {
         this.user = user;
     }
 
-    public CarDescription getCarDescription() {
-        return carDescription;
+    public Model getModel() {
+        return model;
     }
 
-    public void setCarDescription(CarDescription carDescription) {
-        this.carDescription = carDescription;
+    public void setModel(Model model) {
+        this.model = model;
     }
+
 }

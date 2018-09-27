@@ -1,15 +1,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
->
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:fragment="head">
     <meta http-equiv="Content-Type" content="application/html; charset=UTF-8"/>
-    <link rel="stylesheet"
-          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-    />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css}" />
+    <link rel="stylesheet" th:href="@{/webjars/datatables/1.10.15/media/css/jquery.dataTables.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" href="../../../css/main.css"/>
-    <script src="../../static/js/common.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="http://js.api.here.com/v3/3.0/mapsjs-ui.css" />
 
+
+    <script type="application/javascript" th:src="@{/webjars/jquery/3.2.1/dist/jquery.min.js}" defer></script>
+    <script type="application/javascript" th:src="@{/js/jquery.validate.min.js}" defer></script>
+    <script type="application/javascript" th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"
+            defer></script>
+    <script type="application/javascript" th:src="@{/webjars/momentjs/2.18.1/min/moment.min.js}" defer></script>
+    <script type="application/javascript" th:src="@{/webjars/momentjs/2.18.1/locale/uk.js}" defer></script>
+    <script type="application/javascript" th:src="@{/webjars/momentjs/2.18.1/locale/ru.js}" defer></script>
+    <script type="application/javascript" th:src="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js}" defer></script>
+
+    <script type="application/javascript" th:src="@{/webjars/datatables/1.10.15/media/js/dataTables.bootstrap.min.js}"
+            defer></script>
+
+    <script type="application/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}" defer></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+    <script type="application/javascript" th:src="@{/js/common.js}" defer></script>
 </head>
 <body th:fragment="body">
 <nav class="navbar navbar-inverse navbar-static-top">
@@ -38,13 +58,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/logout" th:text="#{app.logout}"></a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" th:text="#{lang.change}"><span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="?lang=ru" th:text="#{lang.ru}"></a></li>
-                            <li><a href="?lang=en" th:text="#{lang.en}"></a></li>
-                        </ul>
-                    </li>
+                    <li th:replace="fragment/langpanel :: language"></li>
                 </ul>
             </div>
             <div class="button-group" sec:authorize="!isFullyAuthenticated()">
@@ -57,18 +71,14 @@
                     </li>
                     <li><a href="#" data-toggle="modal" data-target="#modalRegister" class="" th:text="#{app.register}">Register</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" th:text="#{lang.change}"><span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="?lang=ru" th:text="#{lang.ru}"></a></li>
-                            <li><a href="?lang=en" th:text="#{lang.en}"></a></li>
-                        </ul>
-                    </li>
+                    <li th:replace="fragment/langpanel :: language"></li>
                 </ul>
             </div>
         </div>
     </div>
-
+    <script type="text/javascript" th:inline="javascript">
+        var locale = [[${#locale}]]
+    </script>
     <!--/.navbar-collapse -->
     </div>
 </nav>

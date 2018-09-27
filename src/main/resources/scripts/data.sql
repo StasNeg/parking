@@ -1,0 +1,10 @@
+--DROP TABLE IF EXISTS user_roles;
+--DROP TABLE IF EXISTS cars;
+--DROP TABLE IF EXISTS users;
+--DROP SEQUENCE IF EXISTS global_seq;
+--
+--CREATE SEQUENCE global_seq START 100000;
+--
+--
+--INSERT INTO user (id, email, password, first_name, last_name)
+--VALUES ( 100, 'user@yandex.ru', '$2a$10$Sh0ZD2NFrzRRJJEKEWn8l.92ROEuzlVyzB9SV1AM8fdluPR0aC1ni','Staislav', 'Nizhnyi');
