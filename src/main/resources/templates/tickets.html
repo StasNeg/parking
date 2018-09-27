@@ -43,12 +43,6 @@
                             <select class="form-control" id="car" name="car">
                             </select>
                         </div>
-                        <!--<div class="form-group">-->
-                            <!--<label for="country" th:text="#{ticket.form.country.label}"></label>-->
-                            <!--<select class="form-control" id="country" name="country"-->
-                                    <!--th:placeholder="#{ticket.form.country.placeholder}">-->
-                            <!--</select>-->
-                        <!--</div>-->
                         <div class="form-group">
                             <label for="city" th:text="#{ticket.form.city.label}"></label>
                             <select class="form-control" id="city" name="city"
@@ -69,15 +63,22 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="dateTimeStart" th:text="#{ticket.form.dateTimeStart.label}"></label>
-                            <input type="datetime-local" class="form-control" id="dateTimeStart" name="dateTimeStart"
-                                   th:placeholder="#{ticket.form.dateTimeStart.placeholder}">
+                            <div class='input-group date' id='datetimepickerStart'>
+                                <input type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="dateTimeEnd" th:text="#{ticket.form.dateTimeEnd.label}"></label>
-                            <input type="datetime-local" class="form-control" id="dateTimeEnd" name="dateTimeEnd"
-                                   th:placeholder="#{ticket.form.dateTimeEnd.placeholder}">
+                            <div class='input-group date' id='datetimepickerEnd'>
+                                <input type='text' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <button type="submit" class="btn btn-default" th:text="#{ticket.form.button.save}"></button>
                         </div>
@@ -120,7 +121,7 @@
 <div th:replace="fragment/footer :: footer"></div>
 
 
-<script type="application/javascript" th:src="@{/js/common.js}" defer></script>
+
 <script type="application/javascript" th:src="@{/js/validateTicketForm.js}" defer></script>
 <script type="application/javascript" th:src="@{/js/ticket.js}" defer></script>
 

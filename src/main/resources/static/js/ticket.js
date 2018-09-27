@@ -1,5 +1,6 @@
 $('#editOrCreate').on('shown.bs.modal', function (e) {
     resetValidation();
+    dateTimePickerInit();
 })
 
 function saveOrEditTicket() {
@@ -93,4 +94,21 @@ function removeBubbles(){
     ui.getBubbles().forEach(function (bubble) {
         ui.removeBubble(bubble);
     });
+}
+
+function dateTimePickerInit(){
+        $('#datetimepickerStart').datetimepicker(
+        {locale: locale}
+        );
+        $('#datetimepickerEnd').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            locale: locale
+        });
+        $("#datetimepickerStart").on("dp.change", function (e) {
+            $('#datetimepickerEnd').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepickerEnd").on("dp.change", function (e) {
+            $('#datetimepickerStart').data("DateTimePicker").maxDate(e.date);
+        });
+
 }

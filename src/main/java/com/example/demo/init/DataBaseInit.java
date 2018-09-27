@@ -86,15 +86,15 @@ public class DataBaseInit implements ApplicationRunner {
 // city18i
         CityI18n dnepri18nRu = new CityI18n(Language.RU, dnepr, "Днепр");
         CityI18n dnepri18nEn = new CityI18n(Language.EN, dnepr, "Dnepr");
-        CityI18n dnepri18nUa = new CityI18n(Language.UA, dnepr, "Дніпро");
+        CityI18n dnepri18nUa = new CityI18n(Language.UK, dnepr, "Дніпро");
 
         CityI18n kievi18nRu = new CityI18n(Language.RU, kiev, "Киев");
         CityI18n kievri18nEn = new CityI18n(Language.EN, kiev, "Kiev");
-        CityI18n kievi18nUa = new CityI18n(Language.UA, kiev, "Київ");
+        CityI18n kievi18nUa = new CityI18n(Language.UK, kiev, "Київ");
 
         CityI18n lvovi18nRu = new CityI18n(Language.RU, lvov, "Львов");
         CityI18n lvovri18nEn = new CityI18n(Language.EN, lvov, "Lvov");
-        CityI18n lvovi18nUa = new CityI18n(Language.UA, lvov, "Львів");
+        CityI18n lvovi18nUa = new CityI18n(Language.UK, lvov, "Львів");
 
 //        street dnipro
         Street yvorn = new Street(dnepr, "avenue");
@@ -112,31 +112,31 @@ public class DataBaseInit implements ApplicationRunner {
 
 //        streeti18n
         StreetI18n dmitraYvornRu = new StreetI18n(Language.RU, yvorn, "Дмитрия Яворницког, площадь");
-        StreetI18n dmitraYvornUA = new StreetI18n(Language.UA, yvorn, "Дмитра Яворницького, площа");
+        StreetI18n dmitraYvornUA = new StreetI18n(Language.UK, yvorn, "Дмитра Яворницького, площа");
         StreetI18n dmitraYvornEN = new StreetI18n(Language.EN, yvorn, "Dmytra Yavornytskoho, Avenue");
 
         StreetI18n knzMdrRu = new StreetI18n(Language.RU, knzyar, "Князя Ярослава Мудрого, улица");
-        StreetI18n knzMdrUA = new StreetI18n(Language.UA, knzyar, "Князя Ярослава Мудрого, вулица");
+        StreetI18n knzMdrUA = new StreetI18n(Language.UK, knzyar, "Князя Ярослава Мудрого, вулица");
         StreetI18n knzMdrEN = new StreetI18n(Language.EN, knzyar, "Kniazia Yaroslava Mudroho, street");
 
         StreetI18n polyaRu = new StreetI18n(Language.RU, polya, "Александра Поля, площадь");
-        StreetI18n polyaUA = new StreetI18n(Language.UA, polya, "Олександра Поля, площа");
+        StreetI18n polyaUA = new StreetI18n(Language.UK, polya, "Олександра Поля, площа");
         StreetI18n polyaEN = new StreetI18n(Language.EN, polya, "Oleksandra Polia Ave, avenue");
 
         StreetI18n sichNabRu = new StreetI18n(Language.RU, sichNab, "Сичеславская набережная, улица");
-        StreetI18n sichNabUA = new StreetI18n(Language.UA, sichNab, "Січеславська набережна, вулица");
+        StreetI18n sichNabUA = new StreetI18n(Language.UK, sichNab, "Січеславська набережна, вулица");
         StreetI18n sichNabEN = new StreetI18n(Language.EN, sichNab, "Sitcheslavska naberezhnaya, street");
 
         StreetI18n chrechEn = new StreetI18n(Language.EN, krech, "Khreschatyk Street");
-        StreetI18n chrechUa = new StreetI18n(Language.UA, krech, "Хрещатик, вулиця");
+        StreetI18n chrechUa = new StreetI18n(Language.UK, krech, "Хрещатик, вулиця");
         StreetI18n chrechRu = new StreetI18n(Language.RU, krech, "Хрещатик, улиця");
 
         StreetI18n lukrEn = new StreetI18n(Language.EN, lUkrain, "Lesi Ukrainky, Street");
-        StreetI18n lukrUa = new StreetI18n(Language.UA, lUkrain, "Лесі Українки, вулиця");
+        StreetI18n lukrUa = new StreetI18n(Language.UK, lUkrain, "Лесі Українки, вулиця");
         StreetI18n lukrRu = new StreetI18n(Language.RU, lUkrain, "Леси Украинки, улица");
 
         StreetI18n bassEn = new StreetI18n(Language.EN, basseyn, "Baseina St");
-        StreetI18n bassUa = new StreetI18n(Language.UA, basseyn, "Басейна вул.");
+        StreetI18n bassUa = new StreetI18n(Language.UK, basseyn, "Басейна вул.");
         StreetI18n bassRu = new StreetI18n(Language.RU, basseyn, "Басейная ул.");
 //
 
