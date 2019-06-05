@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
         name = "car_dateTime_ticket_unique_idx")})
 public class Ticket extends AbstractBaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "car", nullable = false)
     @NotNull
     private Car car;

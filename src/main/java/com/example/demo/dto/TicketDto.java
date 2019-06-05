@@ -1,11 +1,14 @@
 package com.example.demo.dto;
 
 import com.example.demo.model.car.Car;
+import com.example.demo.model.place.City;
 import com.example.demo.model.ticket.Ticket;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class TicketDto {
     public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm";
@@ -97,9 +100,9 @@ public class TicketDto {
     }
 
     public static TicketDto asTo(Ticket ticket) {
-        String city = ticket.getParkingPlace().getStreet().getCity().getCities().size() == 0 ? "No city" : ticket.getParkingPlace().getStreet().getCity().getCities().get(0).getName();
-        String street = ticket.getParkingPlace().getStreet().getStreetI18ns().size() == 0 ? "No Street name in that local" : ticket.getParkingPlace().getStreet().getStreetI18ns().get(0).getName();
-        return new TicketDto(ticket.getId(), street, city,
+        String city = Optional.ofNullable(ticket.getParkingPlace().getStreet().getCity().getCities()).orElse(new ArrayList<>()).size() == 0 ? "No city" : ticket.getParkingPlace().getStreet().getCity().getCities().get(0).getName();
+        String street = Optional.ofNullable(ticket.getParkingPlace().getStreet().getStreetI18ns()).orElse(new ArrayList<>()).size() == 0 ? "No Street name in that local" : ticket.getParkingPlace().getStreet().getStreetI18ns().get(0).getName();
+        return new TicketDto(Optional.ofNullable(ticket.getId()).orElse(0L), street, city,
                 ticket.getParkingPlace().getStreetNumber(), ticket.getDateTimeStart(), ticket.getDateTimeEnd(), ticket.getCar().getNumber(), CarDto.asTo(ticket.getCar()));
     }
 }

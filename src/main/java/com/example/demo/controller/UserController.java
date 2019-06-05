@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller    // This means that this class is a Controller
-@RequestMapping(path = "/admin") // This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/admin") // This means URL's start with /demo (after ParkingApplication path)
 public class UserController {
 
     private UserService userService;

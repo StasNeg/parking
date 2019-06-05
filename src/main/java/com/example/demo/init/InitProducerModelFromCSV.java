@@ -14,10 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +22,7 @@ import java.util.Map;
 
 @Component
 @Order(0)
-@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create-drop")
+@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create")
 public class InitProducerModelFromCSV implements ApplicationRunner {
 
     private ModelRepository modelRepository;
@@ -39,6 +36,10 @@ public class InitProducerModelFromCSV implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        init();
+    }
+
+    public void init() throws IOException {
         File file = new ClassPathResource("cars_csv.csv").getFile();
         try (
                 Reader reader = new BufferedReader(new FileReader(file));

@@ -3,6 +3,8 @@ package com.example.demo.dto;
 import com.example.demo.model.car.Car;
 import com.example.demo.model.enums.CarType;
 
+import java.util.Optional;
+
 public class CarDto {
     private Long id;
     private String number;
@@ -73,6 +75,6 @@ public class CarDto {
     }
 
     public static CarDto asTo(Car car){
-        return new CarDto(car.getId(), car.getNumber(),car.getModel().getName(),car.getModel().getType(),car.getModel().getProducer().getName(),car.getDescription());
+        return new CarDto(Optional.ofNullable(car.getId()).orElse(0L), car.getNumber(),car.getModel().getName(),car.getModel().getType(),car.getModel().getProducer().getName(),car.getDescription());
     }
 }

@@ -13,6 +13,7 @@ import com.example.demo.utils.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
@@ -44,5 +45,10 @@ public class TicketService {
     public Iterable<TicketDto> getAll() {
         return ticketRepository.findAllByUserIdToTicketDto(UserUtil.getAutorizedId(), Language.valueOf(LocaleContextHolder.getLocale().getLanguage().toUpperCase()));
     }
+
+    public Iterable<Ticket> getAllTicket() {
+        return ticketRepository.findAll();
+    }
+
 
 }

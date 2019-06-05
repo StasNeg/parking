@@ -4,6 +4,7 @@ import com.example.demo.service.ParkingUserDetailsService;
 import com.example.demo.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,11 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan(basePackages ={"com.example.demo"})
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private ParkingUserDetailsService userDetailsService;
-
     private AuthSuccessHandler authSuccessHandler;
     private AuthFailureHandler authFailureHandler;
     private CustomAccessDeniedHandler customAccessDeniedHandler;
@@ -34,6 +35,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
+//    @Autowired
     public SpringSecurityConfig(boolean disableDefaults, ParkingUserDetailsService userDetailsService, AuthSuccessHandler authSuccessHandler) {
         super(disableDefaults);
         this.userDetailsService = userDetailsService;

@@ -30,7 +30,7 @@ import java.util.HashSet;
 
 @Component
 @Order(1)
-@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create-drop")
+@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create")
 public class DataBaseInit implements ApplicationRunner {
     private UserRepository userRepository;
     private CarRepository carRepository;
@@ -60,8 +60,11 @@ public class DataBaseInit implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        init();
+    }
 
-//            Model
+    private void init(){
+        //            Model
         Model modelMazdaCX7 = modelRepository.findByModelName("CX-7").get();
         Model modelMazdaCX9 = modelRepository.findByModelName("CX-9").get();
         Model modelToyotaRAV4 = modelRepository.findByModelName("RAV4").get();
@@ -173,7 +176,7 @@ public class DataBaseInit implements ApplicationRunner {
         parkingPlaceRepository.saveAll(Arrays.asList(placeCenter1, placeCenter2, placeCenter3, placeCenter4, placeCenter5,
                 placek1,placek2,placek3));
         ticketRepository.saveAll(Arrays.asList(ticket1, ticket2, ticket3, ticket4, ticket5));
-    }
 
+    }
 
 }
